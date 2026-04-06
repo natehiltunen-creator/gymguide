@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Complete Gym Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0f0f0f;
+    --white: #f5f2ec;
+    --accent: #e8532a;
+    --accent2: #2a6fe8;
+    --gold: #d4a831;
+    --green: #2d7a4f;
+    --muted: #6b6860;
+    --surface: #1a1a1a;
+    --surface2: #242424;
+    --border: rgba(255,255,255,0.08);
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,15,15,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+  }
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+  .nav-links a {
+    display: block;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    color: var(--muted);
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 6rem 4rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--black);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(232,83,42,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 70%, rgba(42,111,232,0.08) 0%, transparent 70%);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 900px; }
+  .hero-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 10vw, 9rem);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    font-size: 1.15rem;
+    color: rgba(245,242,236,0.65);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    margin-top: 2rem;
+  }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    color: var(--accent);
+    display: block;
+  }
+  .hero-stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* SECTION LAYOUT */
+  section {
+    padding: 6rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .section-tag::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+    display: block;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 3rem;
+  }
+  .accent { color: var(--accent); }
+
+  /* DIVIDER */
+  .full-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 4rem;
+  }
+
+  /* STEP CARDS */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .step-card {
+    background: var(--surface);
+    padding: 2rem;
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .step-card:hover { background: var(--surface2); }
+  .step-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s;
+  }
+  .step-card:hover .step-num { color: var(--accent); }
+  .step-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+  }
+  .step-card p { font-size: 14px; color: rgba(245,242,236,0.6); line-height: 1.6; }
+
+  /* WORKOUT PLAN TABLE */
+  .week-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1px;
+    flex-wrap: wrap;
+  }
+  .week-tab {
+    padding: 10px 22px;
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  .week-tab:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+  .week-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .workout-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .workout-table th {
+    background: var(--surface2);
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .workout-table td {
+    padding: 14px 20px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .workout-table tr:last-child td { border-bottom: none; }
+  .workout-table tr:hover td { background: var(--surface2); }
+  .day-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  .badge-push { background: rgba(232,83,42,0.15); color: var(--accent); }
+  .badge-pull { background: rgba(42,111,232,0.15); color: var(--accent2); }
+  .badge-legs { background: rgba(45,122,79,0.2); color: #4daa7a; }
+  .badge-rest { background: rgba(107,104,96,0.2); color: var(--muted); }
+  .badge-full { background: rgba(212,168,49,0.15); color: var(--gold); }
+
+  /* EXERCISE CARDS */
+  .exercise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .exercise-card {
+    background: var(--surface);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+  .exercise-card:hover { background: var(--surface2); }
+  .exercise-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 1rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+  }
+  .exercise-card h4 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+  .exercise-card .muscle {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .exercise-card p {
+    font-size: 13px;
+    color: rgba(245,242,236,0.55);
+    line-height: 1.55;
+  }
+  .sets-reps {
+    display: flex;
+    gap: 16px;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .set-item { text-align: center; }
+  .set-num { font-family: var(--font-display); font-size: 1.4rem; color: var(--white); display: block; }
+  .set-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+
+  /* NUTRITION */
+  .macro-bar-container {
+    margin-bottom: 3rem;
+  }
+  .macro-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .macro-label {
+    width: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .macro-track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .macro-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s cubic-bezier(0.4,0,0.2,1);
+  }
+  .macro-pct { width: 50px; text-align: right; font-size: 13px; color: var(--muted); }
+
+  .meal-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .meal-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+    border-radius: 2px;
+  }
+  .meal-time {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .meal-card h4 { font-size: 14px; font-weight: 500; margin-bottom: 0.75rem; }
+  .meal-items { list-style: none; }
+  .meal-items li {
+    font-size: 13px;
+    color: rgba(245,242,236,0.6);
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    justify-content: space-between;
+  }
+  .meal-items li:last-child { border-bottom: none; }
+  .cal { color: var(--accent); font-size: 11px; }
+
+  /* TIPS */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  .tip-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 1.5rem;
+  }
+  .tip-card.blue { border-left-color: var(--accent2); }
+  .tip-card.gold { border-left-color: var(--gold); }
+  .tip-card.green { border-left-color: #4daa7a; }
+  .tip-card h4 { font-size: 14px; font-weight: 500; margin-bottom: 0.5rem; }
+  .tip-card p { font-size: 13px; color: rgba(245,242,236,0.6); line-height: 1.55; }
+
+  /* PROGRESS TRACKER */
+  .progress-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+  }
+  .progress-weeks {
+    display: flex;
+    gap: 4px;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .progress-week {
+    flex: 1;
+    min-width: 50px;
+    text-align: center;
+  }
+  .week-bar-wrap {
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+  .week-bar {
+    width: 100%;
+    max-width: 36px;
+    border-radius: 2px 2px 0 0;
+    background: rgba(232,83,42,0.3);
+    transition: background 0.2s;
+  }
+  .week-bar.active { background: var(--accent); }
+  .week-label { font-size: 10px; color: var(--muted); text-transform: uppercase; }
+
+  /* FOOTER */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 3rem 4rem;
+    text-align: center;
+  }
+  footer p { font-size: 13px; color: var(--muted); }
+  footer strong { color: var(--accent); }
+
+  /* TOGGLE */
+  .plan-content { display: none; }
+  .plan-content.active { display: block; }
+
+  @media (max-width: 768px) {
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 4rem 1.5rem; }
+    .full-divider { margin: 0 1.5rem; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    footer { padding: 2rem 1.5rem; }
+    .hero-stats { gap: 2rem; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">GRIND</div>
+  <ul class="nav-links">
+    <li><a href="#getting-started">Start</a></li>
+    <li><a href="#workout-plan">Plan</a></li>
+    <li><a href="#exercises">Exercises</a></li>
+    <li><a href="#nutrition">Nutrition</a></li>
+    <li><a href="#recovery">Recovery</a></li>
+    <li><a href="#mindset">Mindset</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Complete Gym Guide</div>
+    <h1>BUILD<br>YOUR<br><span>BEST</span><br>BODY</h1>
+    <p>A step-by-step system covering workouts, nutrition, recovery, and mindset — everything you need to transform your physique and performance.</p>
+    <div class="hero-stats">
+      <div>
+        <span class="hero-stat-num">12</span>
+        <span class="hero-stat-label">Week Program</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">3–5</span>
+        <span class="hero-stat-label">Days Per Week</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">6</span>
+        <span class="hero-stat-label">Key Sections</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- GETTING STARTED -->
+<section id="getting-started">
+  <div class="section-tag">Step 01</div>
+  <h2 class="section-title">GETTING <span class="accent">STARTED</span></h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <h3>Set Your Goal</h3>
+      <p>Pick one clear goal: build muscle (hypertrophy), lose fat (cut), or improve strength. Every decision — training volume, calories, rest periods — flows from this choice.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <h3>Assess Your Level</h3>
+      <p>Beginner (0–1 yr), Intermediate (1–3 yr), Advanced (3+ yr). Beginners gain muscle and lose fat simultaneously. Advanced lifters must prioritize one at a time.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <h3>Pick Your Equipment</h3>
+      <p>Full gym: barbells, cables, machines. Home gym: dumbbells and bands. Both work — but a barbell + pull-up bar + dip station unlocks the highest-ROI movements.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <h3>Learn the Big 5</h3>
+      <p>Squat, Deadlift, Bench Press, Overhead Press, and Pull-Up/Row. Master these first. They build the most muscle and the safest foundation for everything else.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">05</div>
+      <h3>Schedule & Commit</h3>
+      <p>Block 3–5 gym sessions per week on your calendar like meetings. Consistency over intensity — a moderate plan done every week beats a perfect plan done sporadically.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">06</div>
+      <h3>Track Everything</h3>
+      <p>Log your lifts, bodyweight, and meals. Progress is invisible without data. A simple notebook or app reveals trends, plateaus, and wins that keep you motivated.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- WORKOUT PLAN -->
+<section id="workout-plan">
+  <div class="section-tag">Step 02</div>
+  <h2 class="section-title">12-WEEK <span class="accent">PROGRAM</span></h2>
+  <p style="color: rgba(245,242,236,0.6); max-width: 600px; margin-bottom: 2.5rem; font-size: 15px;">Three phases, each building on the last. Progressive overload is the key — add weight or reps every session.</p>
+
+  <div class="week-tabs">
+    <button class="week-tab active" onclick="showPhase('phase1', this)">Phase 1: Foundation (Wk 1–4)</button>
+    <button class="week-tab" onclick="showPhase('phase2', this)">Phase 2: Build (Wk 5–8)</button>
+    <button class="week-tab" onclick="showPhase('phase3', this)">Phase 3: Peak (Wk 9–12)</button>
+  </div>
+
+  <div id="phase1" class="plan-content active">
+    <table class="workout-table">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Focus</th>
+          <th>Key Exercises</th>
+          <th>Volume</th>
+          <th>Rest</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Monday</td>
+          <td><span class="day-badge badge-push">Push</span></td>
+          <td>Bench Press, OHP, Tricep Pushdowns</td>
+          <td>3×5 compound, 3×12 isolation</td>
+          <td>2–3 min</td>
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td><span class="day-badge badge-pull">Pull</span></td>
+          <td>Barbell Row, Pull-Ups, Bicep Curls</td>
+          <td>3×5 compound, 3×12 isolation</td>
+          <td>2–3 min</td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td><span class="day-badge badge-rest">Rest / Walk</span></td>
+          <td>Light cardio or stretching only</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Thursday</td>
+          <td><span class="day-badge badge-legs">Legs</span></td>
+          <td>Squat, Romanian Deadlift, Leg Press</td>
+          <td>3×5 compound, 3×12 isolation</td>
+          <td>2–3 min</td>
+        </tr>
+        <tr>
+          <td>Friday</td>
+          <td><span class="day-badge badge-full">Full Body</span></td>
+          <td>Deadlift, Dips, Lunges, Face Pulls</td>
+          <td>3×5 compound, 2×15 isolation</td>
+          <td>2–3 min</td>
+        </tr>
+        <tr>
+          <td>Sat–Sun</td>
+          <td><span class="day-badge badge-rest">Recovery</span></td>
+          <td>Mobility work, walks, sleep priority</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 1rem;">Phase 1 goal: Build movement patterns and baseline strength. Add 2.5–5 kg to compound lifts each session when you complete all reps with good form.</p>
+  </div>
+
+  <div id="phase2" class="plan-content">
+    <table class="workout-table">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Focus</th>
+          <th>Key Exercises</th>
+          <th>Volume</th>
+          <th>Rest</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Monday</td>
+          <td><span class="day-badge badge-push">Chest / Shoulders</span></td>
+          <td>Incline DB Press, Cable Fly, Lateral Raises</td>
+          <td>4×8–10</td>
+          <td>90 sec</td>
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td><span class="day-badge badge-legs">Quads / Calves</span></td>
+          <td>Front Squat, Leg Extension, Calf Raises</td>
+          <td>4×8–12</td>
+          <td>90 sec</td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td><span class="day-badge badge-pull">Back / Biceps</span></td>
+          <td>Weighted Pull-Ups, Seated Cable Row, Curls</td>
+          <td>4×8–10</td>
+          <td>90 sec</td>
+        </tr>
+        <tr>
+          <td>Thursday</td>
+          <td><span class="day-badge badge-rest">Rest</span></td>
+          <td>Active recovery, foam rolling</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Friday</td>
+          <td><span class="day-badge badge-legs">Hamstrings / Glutes</span></td>
+          <td>Romanian DL, Hip Thrust, Leg Curl</td>
+          <td>4×8–12</td>
+          <td>90 sec</td>
+        </tr>
+        <tr>
+          <td>Saturday</td>
+          <td><span class="day-badge badge-full">Arms / Core</span></td>
+          <td>Tricep Dips, EZ-Bar Curl, Hanging Leg Raise</td>
+          <td>3×12–15</td>
+          <td>60 sec</td>
+        </tr>
+        <tr>
+          <td>Sunday</td>
+          <td><span class="day-badge badge-rest">Recovery</span></td>
+          <td>Full rest or light yoga</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 1rem;">Phase 2 goal: Hypertrophy focus with higher volume and shorter rest. Aim for last rep to be challenging but form-perfect.</p>
+  </div>
+
+  <div id="phase3" class="plan-content">
+    <table class="workout-table">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Focus</th>
+          <th>Key Exercises</th>
+          <th>Volume</th>
+          <th>Rest</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Monday</td>
+          <td><span class="day-badge badge-push">Strength Push</span></td>
+          <td>Bench Press 5×3, OHP 4×4, Triceps 3×8</td>
+          <td>5×3 heavy</td>
+          <td>3–4 min</td>
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td><span class="day-badge badge-legs">Strength Legs</span></td>
+          <td>Squat 5×3, Deadlift 3×3, Accessory work</td>
+          <td>5×3 heavy</td>
+          <td>3–5 min</td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td><span class="day-badge badge-rest">Deload</span></td>
+          <td>Light cardio + mobility only</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Thursday</td>
+          <td><span class="day-badge badge-pull">Strength Pull</span></td>
+          <td>Weighted Pull-Ups 5×3, Barbell Row 4×4</td>
+          <td>5×3 heavy</td>
+          <td>3–4 min</td>
+        </tr>
+        <tr>
+          <td>Friday</td>
+          <td><span class="day-badge badge-full">Power / Conditioning</span></td>
+          <td>Power Clean, Box Jump, Farmer Carry</td>
+          <td>3×5 explosive</td>
+          <td>2–3 min</td>
+        </tr>
+        <tr>
+          <td>Sat–Sun</td>
+          <td><span class="day-badge badge-rest">Recovery</span></td>
+          <td>Full recovery — sleep and nutrition priority</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 1rem;">Phase 3 goal: Max strength and neural efficiency. Weights should be 90–95% of your training max. Technique is non-negotiable at these loads.</p>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- EXERCISES -->
+<section id="exercises">
+  <div class="section-tag">Step 03</div>
+  <h2 class="section-title">ESSENTIAL <span class="accent">EXERCISES</span></h2>
+  <div class="exercise-grid">
+    <div class="exercise-card">
+      <div class="exercise-icon">🏋️</div>
+      <h4>Barbell Back Squat</h4>
+      <div class="muscle">Quads · Glutes · Hamstrings · Core</div>
+      <p>The king of lower body movements. Bar on traps, feet shoulder-width, knees track over toes. Descend until hip crease passes knee. Drive through the floor on the way up.</p>
+      <div class="sets-reps">
+        <div class="set-item"><span class="set-num">4</span><span class="set-label">Sets</span></div>
+        <div class="set-item"><span class="set-num">5–8</span><span class="set-label">Reps</span></div>
+        <div class="set-item"><span class="set-num">3 min</span><span class="set-label">Rest</span></div>
+      </div>
+    </div>
+    <div class="exercise-card">
+      <div class="exercise-icon">💪</div>
+      <h4>Conventional Deadlift</h4>
+      <div class="muscle">Posterior Chain · Lats · Core · Traps</div>
+      <p>Hinge at hips, bar over mid-foot, neutral spine throughout. "Push the floor away" on the concentric. The most effective full-body strength exercise in existence.</p>
+      <div class="sets-reps">
+        <div class="set-item"><span class="set-num">3</span><span class="set-label">Sets</span></div>
+        <div class="set-item"><span class="set-num">3–5</span><span class="set-label">Reps</span></div>
+        <div class="set-item"><span class="set-num">4 min</span><span class="set-label">Rest</span></div>
+      </div>
+    </div>
+    <div class="exercise-card">
+      <div class="exercise-icon">🎯</div>
+      <h4>Bench Press</h4>
+      <div class="muscle">Pecs · Front Delts · Triceps</div>
+      <p>Feet flat, arch naturally, retract scapula. Bar touches lower chest, elbows at 75° (not flared). Leg drive transfers force from ground through the bar.</p>
+      <div class="sets-reps">
+        <div class="set-item"><span class="set-num">4</span><span class="set-label">Sets</span></div>
+        <div class="set-item"><span class="set-num">5–8</span><span class="set-label">Reps</span></div>
+        <div class="set-item"><span class="set-num">3 min</span><span class="set-label">Rest</span></div>
+      </div>
+    </div>
+    <div class="exercise-card">
+      <div class="exercise-icon">⬆️</div>
+      <h4>Overhead Press</h4>
+      <div class="muscle">Deltoids · Upper Traps · Triceps · Core</div>
+      <p>Stand tall, bar on front deltoids, press in a vertical line. At lockout, shrug slightly to engage upper traps. Brace abs hard — this is a full-body movement.</p>
+      <div class="sets-reps">
+        <div class="set-item"><span class="set-num">4</span><span class="set-label">Sets</span></div>
+        <div class="set-item"><span class="set-num">5–8</span><span class="set-label">Reps</span></div>
+        <div class="set-item"><span class="set-num">2 min</span><span class="set-label">Rest</span></div>
+      </div>
+    </div>
+    <div class="exercise-card">
+      <div class="exercise-icon">🔄</div>
+      <h4>Pull-Up / Chin-Up</h4>
+      <div class="muscle">Lats · Biceps · Rear Delts · Core</div>
+      <p>Dead hang start, depress scapula, drive elbows toward hips. Chin clears bar at top. Weighted pull-ups are the fastest route to a wide back and thick biceps.</p>
+      <div class="sets-reps">
+        <div class="set-item"><span class="set-num">4</span><span class="set-label">Sets</span></div>
+        <div class="set-item"><span class="set-num">Max</span><span class="set-label">Reps</span></div>
+        <div class="set-item"><span class="set-num">2 min</span><span class="set-label">Rest</span></div>
+      </div>
+    </div>
+    <div class="exercise-card">
+      <div class="exercise-icon">🏃</div>
+      <h4>Romanian Deadlift</h4>
+      <div class="muscle">Hamstrings · Glutes · Spinal Erectors</div>
+      <p>Hip hinge with soft knees, bar drags down the shins. Feel the hamstrings stretch at the bottom. Squeeze glutes at the top. Do not hyperextend the lumbar at lockout.</p>
+      <div class="sets-reps">
+        <div class="set-item"><span class="set-num">3</span><span class="set-label">Sets</span></div>
+        <div class="set-item"><span class="set-num">8–12</span><span class="set-label">Reps</span></div>
+        <div class="set-item"><span class="set-num">2 min</span><span class="set-label">Rest</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- NUTRITION -->
+<section id="nutrition">
+  <div class="section-tag">Step 04</div>
+  <h2 class="section-title">FUEL YOUR <span class="accent">GAINS</span></h2>
+  <p style="color: rgba(245,242,236,0.6); max-width: 600px; margin-bottom: 2.5rem; font-size: 15px;">You can't out-train a bad diet. Nutrition is 60–70% of your results. Here's how to eat for your goal.</p>
+
+  <div style="background: var(--surface); border: 1px solid var(--border); padding: 2rem; margin-bottom: 2rem;">
+    <h3 style="font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 1px; margin-bottom: 1.5rem;">CALORIE TARGETS</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+      <div style="text-align: center; padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border);">
+        <div style="font-family: var(--font-display); font-size: 2rem; color: var(--accent);">+300–500</div>
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-top: 4px;">Surplus (Bulk)</div>
+        <div style="font-size: 12px; color: rgba(245,242,236,0.5); margin-top: 8px;">Maximise muscle growth</div>
+      </div>
+      <div style="text-align: center; padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border);">
+        <div style="font-family: var(--font-display); font-size: 2rem; color: var(--accent2);">±0</div>
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-top: 4px;">Maintenance (Recomp)</div>
+        <div style="font-size: 12px; color: rgba(245,242,236,0.5); margin-top: 8px;">Build muscle & lose fat</div>
+      </div>
+      <div style="text-align: center; padding: 1.5rem; background: var(--surface2); border: 1px solid var(--border);">
+        <div style="font-family: var(--font-display); font-size: 2rem; color: var(--gold);">−300–500</div>
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-top: 4px;">Deficit (Cut)</div>
+        <div style="font-size: 12px; color: rgba(245,242,236,0.5); margin-top: 8px;">Lose fat, retain muscle</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 1px; margin-bottom: 1.5rem;">MACRO SPLIT (Bulk Example · 3,000 kcal)</h3>
+  <div class="macro-bar-container">
+    <div class="macro-row">
+      <div class="macro-label">Protein</div>
+      <div class="macro-track"><div class="macro-fill" style="width: 30%; background: var(--accent);"></div></div>
+      <div class="macro-pct">30% · 225g</div>
+    </div>
+    <div class="macro-row">
+      <div class="macro-label">Carbohydrates</div>
+      <div class="macro-track"><div class="macro-fill" style="width: 50%; background: var(--accent2);"></div></div>
+      <div class="macro-pct">50% · 375g</div>
+    </div>
+    <div class="macro-row">
+      <div class="macro-label">Fats</div>
+      <div class="macro-track"><div class="macro-fill" style="width: 20%; background: var(--gold);"></div></div>
+      <div class="macro-pct">20% · 67g</div>
+    </div>
+  </div>
+
+  <h3 style="font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 1px; margin-bottom: 0.5rem;">DAILY MEAL PLAN</h3>
+  <div class="meal-cards">
+    <div class="meal-card">
+      <div class="meal-time">07:00 — Breakfast</div>
+      <h4>Power Start</h4>
+      <ul class="meal-items">
+        <li><span>5 whole eggs + 3 whites</span><span class="cal">280 kcal</span></li>
+        <li><span>100g oats with berries</span><span class="cal">380 kcal</span></li>
+        <li><span>Coffee or green tea</span><span class="cal">5 kcal</span></li>
+      </ul>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">10:30 — Pre-Workout</div>
+      <h4>Fuel Up</h4>
+      <ul class="meal-items">
+        <li><span>200g Greek yogurt</span><span class="cal">130 kcal</span></li>
+        <li><span>1 banana</span><span class="cal">90 kcal</span></li>
+        <li><span>20g whey protein</span><span class="cal">80 kcal</span></li>
+      </ul>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">13:30 — Post-Workout</div>
+      <h4>Recovery Meal</h4>
+      <ul class="meal-items">
+        <li><span>200g chicken breast</span><span class="cal">330 kcal</span></li>
+        <li><span>200g white rice</span><span class="cal">260 kcal</span></li>
+        <li><span>Mixed vegetables</span><span class="cal">60 kcal</span></li>
+      </ul>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">17:00 — Afternoon</div>
+      <h4>Steady Fuel</h4>
+      <ul class="meal-items">
+        <li><span>200g salmon or tuna</span><span class="cal">280 kcal</span></li>
+        <li><span>150g sweet potato</span><span class="cal">130 kcal</span></li>
+        <li><span>Handful almonds</span><span class="cal">160 kcal</span></li>
+      </ul>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">20:00 — Dinner</div>
+      <h4>Evening Build</h4>
+      <ul class="meal-items">
+        <li><span>200g lean beef / turkey</span><span class="cal">340 kcal</span></li>
+        <li><span>Large salad + olive oil</span><span class="cal">120 kcal</span></li>
+        <li><span>200g cottage cheese</span><span class="cal">160 kcal</span></li>
+      </ul>
+    </div>
+    <div class="meal-card">
+      <div class="meal-time">22:30 — Pre-Sleep</div>
+      <h4>Slow Protein</h4>
+      <ul class="meal-items">
+        <li><span>30g casein protein shake</span><span class="cal">120 kcal</span></li>
+        <li><span>1 tbsp almond butter</span><span class="cal">100 kcal</span></li>
+        <li><span>Herbal tea</span><span class="cal">0 kcal</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- RECOVERY -->
+<section id="recovery">
+  <div class="section-tag">Step 05</div>
+  <h2 class="section-title">RECOVERY & <span class="accent">REST</span></h2>
+  <p style="color: rgba(245,242,236,0.6); max-width: 600px; margin-bottom: 2.5rem; font-size: 15px;">Muscle is built outside the gym — during sleep and rest. Recovery is when you actually grow.</p>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <h4>Sleep 7–9 Hours</h4>
+      <p>Growth hormone release peaks during deep sleep stages 3 and 4. Sleep debt tanks testosterone, increases cortisol, and kills your motivation and performance. Non-negotiable.</p>
+    </div>
+    <div class="tip-card blue">
+      <h4>Hydration</h4>
+      <p>Drink 3–4 litres of water daily, more on training days. Even 2% dehydration reduces strength output by up to 10%. Add sodium if you sweat heavily.</p>
+    </div>
+    <div class="tip-card gold">
+      <h4>Active Recovery</h4>
+      <p>Light walks, swimming, or yoga on rest days increases blood flow to muscles, reduces DOMS, and accelerates repair. Never just sit still on a rest day.</p>
+    </div>
+    <div class="tip-card green">
+      <h4>Foam Rolling & Stretching</h4>
+      <p>5–10 minutes post-workout targeting worked muscles. Focus on hip flexors, thoracic spine, and hamstrings. Improves range of motion and reduces injury risk over time.</p>
+    </div>
+    <div class="tip-card">
+      <h4>Deload Weeks</h4>
+      <p>Every 4–6 weeks, reduce volume and intensity by 40–50% for one week. This allows connective tissue and the nervous system to recover and sets you up for personal records.</p>
+    </div>
+    <div class="tip-card blue">
+      <h4>Stress Management</h4>
+      <p>Chronic stress elevates cortisol which directly inhibits muscle protein synthesis. Meditation, cold showers, time in nature, or even just breathing slowly — find what works.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- MINDSET -->
+<section id="mindset">
+  <div class="section-tag">Step 06</div>
+  <h2 class="section-title">THE <span class="accent">MINDSET</span></h2>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 3rem;">
+    <div style="background: var(--surface); padding: 2rem;">
+      <div style="font-family: var(--font-display); font-size: 1rem; letter-spacing: 2px; color: var(--muted); margin-bottom: 1rem;">THE TRUTH ABOUT PROGRESS</div>
+      <p style="font-size: 15px; color: rgba(245,242,236,0.7); line-height: 1.7;">Results look slow day-to-day and dramatic year-to-year. The lifters with elite physiques simply haven't stopped. There's no secret program — just consistent effort compounding over time.</p>
+    </div>
+    <div style="background: var(--surface2); padding: 2rem; border-left: 1px solid var(--border);">
+      <div style="font-family: var(--font-display); font-size: 1rem; letter-spacing: 2px; color: var(--muted); margin-bottom: 1rem;">THE PLATEAU PROTOCOL</div>
+      <p style="font-size: 15px; color: rgba(245,242,236,0.7); line-height: 1.7;">When progress stalls, change ONE variable: more food, more sleep, different rep range, or a deload. Changing everything at once means you'll never know what worked. Be a scientist.</p>
+    </div>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card gold">
+      <h4>Chase Strength, Not Looks</h4>
+      <p>Focus on getting stronger in the lifts. A bigger bench press always comes with a bigger chest. Numbers on the bar don't lie when the mirror does.</p>
+    </div>
+    <div class="tip-card">
+      <h4>Compare Yourself to Yesterday</h4>
+      <p>Other people's genetics, drug use, and circumstances are variables you can't control. Your job: be slightly better than last week's version of you. That's it.</p>
+    </div>
+    <div class="tip-card green">
+      <h4>Embrace Discomfort</h4>
+      <p>The last 2 reps of a set where you could stop are where growth happens. Train hard enough to be uncomfortable, but not so hard you can't recover. Find the edge.</p>
+    </div>
+    <div class="tip-card blue">
+      <h4>Identity, Not Goals</h4>
+      <p>Don't "try to go to the gym." Become someone who trains. That identity shift makes consistency automatic. You don't need motivation — you need identity alignment.</p>
+    </div>
+  </div>
+
+  <div style="background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 2.5rem; margin-top: 2rem; max-width: 700px;">
+    <div style="font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 2px; color: var(--accent); margin-bottom: 1rem;">FINAL WORD</div>
+    <p style="font-size: 16px; color: rgba(245,242,236,0.8); line-height: 1.8;">Every great physique was built one workout at a time, one meal at a time, one night of sleep at a time. You now have the blueprint. The only question is whether you'll show up consistently for the next 12 months. The gym doesn't care how you feel — and neither do results. Go build something you're proud of.</p>
+  </div>
+</section>
+
+<footer>
+  <div style="font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 3px; color: var(--accent); margin-bottom: 1rem;">GRIND</div>
+  <p>This guide is for informational purposes only. Consult a healthcare professional before starting any new exercise or nutrition program. <strong>Train smart. Eat well. Rest hard.</strong></p>
+</footer>
+
+<script>
+function showPhase(id, btn) {
+  document.querySelectorAll('.plan-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.week-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
